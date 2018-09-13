@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Gwent deckbuilder</string>
+    <string name="action_settings">Settings</string>
+    
+    <string-array name="factions" >
+        <item>Monsters</item>
+        <item>Nilfgaard</item>
+        <item>Northern Realms</item>
+        <item>Scoiatael</item>
+        <item>Skellige</item>
+    </string-array>
+
+    <string-array name="Monsters_leaders" >
+        <item>Arachas Queen</item>
+        <item>Dagon</item>
+        <item>Eredin</item>
+        <item>Unseen Elder</item>
+    </string-array>
+
+    <string-array name="Nilfgaard_leaders">
+        <item>Emhyr</item>
+        <item>John Calveit</item>
+        <item>Morvran Voorhis</item>
+        <item>Usurper</item>
+    </string-array>
+    
+    <string-array name="Norhern_Relalms_leaders">
+        <item>King Foltest</item>
+        <item>King Henselt</item>
+        <item>King Radovid V</item>
+        <item>Princess Adda</item>
+        <item></item>
+    </string-array>
+
+    <string-array name="Scoiatael_leaders">
+        <item>Brouver Hoog</item>
+        <item>Eithne</item>
+        <item>Filavandrel</item>
+        <item>Francesca Findebair</item>
+    </string-array>
+
+    <string-array name="Skellige_leaders">
+        <item>Bran Tuirseach</item>
+        <item>Crah an Craite</item>
+        <item>Eist Tuirseach</item>
+        <item>Harald the Cripple</item>
+    </string-array>
+
+</resources>
+
