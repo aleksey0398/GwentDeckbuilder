@@ -21,7 +21,7 @@
         </activity>
 
         <activity
-            android:name=".NewDeckActivity"
+            android:name=".activities.NewDeckActivity"
             android:theme="@style/AppTheme.NoActionBar"
             />
         <activity android:name=".DeckMenu"/>
