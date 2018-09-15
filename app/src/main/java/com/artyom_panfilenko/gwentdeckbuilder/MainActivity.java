@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     */
     RecyclerView rv;
-    List<Deck> decks = new ArrayList<Deck>();
+    List<Deck> decks = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         DeckHelper deckHelper = new DeckHelper(this);
-        deckHelper.getAll();
+        decks = deckHelper.getAll();
         rv = findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setItemAnimator(new DefaultItemAnimator());

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class DeckMenu extends AppCompatActivity{
     RecyclerView rvAlCards,rvDeckCards;
     ArrayList<Card> cards = new ArrayList<>();
+    ArrayList<DeckCard> deckCards = new ArrayList<>();
     TextView txtFaction;
     TextView txtName;
     Spinner spLeaders;
@@ -61,15 +62,23 @@ public class DeckMenu extends AppCompatActivity{
             }
 
         }
-        CardHelper ch = new CardHelper(this);
-        cards = ch.getAll();
+
         ArrayAdapter<String> adapter = (ArrayAdapter)spLeaders.getAdapter();
         spLeaders.setSelection(adapter.getPosition(leader));
-        rvAlCards = findViewById(R.id.rv_all_cards);
 
+        rvAlCards = findViewById(R.id.rv_all_cards);
+        CardHelper ch = new CardHelper(this);
+        cards = ch.getAll();
         rvAlCards.setLayoutManager(new LinearLayoutManager(this));
         rvAlCards.setItemAnimator(new DefaultItemAnimator());
         rvAlCards.setAdapter(new CardsRVAdapter(cards,this));
+
+        rvDeckCards = findViewById(R.id.rv_deck_cards);
+        cards = ch.getAll();
+        rvAlCards.setLayoutManager(new LinearLayoutManager(this));
+        rvAlCards.setItemAnimator(new DefaultItemAnimator());
+        rvAlCards.setAdapter(new CardsRVAdapter(cards,this));
+
 
     }
 
