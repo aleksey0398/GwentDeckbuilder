@@ -11,7 +11,7 @@ public class Card {
     private String rarity;
     private String faction;
 
-    public Card(int id,String name, String tags,String image,String description, String type, String rarity, String faction) {
+    public Card(int id, String name, String tags, String image, String description, String type, String rarity, String faction) {
         this.id = id;
         this.name = name;
         this.tags = tags;

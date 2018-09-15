@@ -1,14 +1,16 @@
 package com.artyom_panfilenko.gwentdeckbuilder;
 
 
-public class Deck {
+import java.io.Serializable;
+
+public class Deck implements Serializable {
     private int id;
     private String name;
     private String faction;
     private String leader;
     private String cards;
 
-    public Deck(int id,String name, String faction, String leader, String cards) {
+    public Deck(int id, String name, String faction, String leader, String cards) {
         this.id = id;
         this.name = name;
         this.faction = faction;
