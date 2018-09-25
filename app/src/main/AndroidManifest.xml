@@ -22,7 +22,6 @@
 
         <activity
             android:name=".activities.NewDeckActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             />
         <activity android:name=".activities.DeckMenuActivity"/>
 
