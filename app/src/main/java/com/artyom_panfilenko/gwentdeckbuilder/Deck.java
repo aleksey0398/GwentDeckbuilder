@@ -18,6 +18,10 @@ public class Deck implements Serializable {
         this.cards = cards;
     }
 
+    public Deck(){
+
+    }
+
     public int getId() {
         return id;
     }

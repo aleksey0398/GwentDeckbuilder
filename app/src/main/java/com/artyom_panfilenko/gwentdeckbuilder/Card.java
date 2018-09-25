@@ -6,21 +6,23 @@ public class Card {
     private String name;
     private String tags;
     private String description;
-    private String image;
     private String type;
     private String rarity;
     private String faction;
 
-    public Card(int id, String name, String tags, String image, String description, String type, String rarity, String faction) {
+    public Card(int id, String name, String tags, String description, String type, String rarity, String faction) {
         this.id = id;
         this.name = name;
         this.tags = tags;
-        this.image = image;
         this.description = description;
 
         this.type = type;
         this.rarity = rarity;
         this.faction = faction;
+    }
+
+    public Card(){
+
     }
 
     public int getId() {
@@ -77,14 +79,6 @@ public class Card {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
 }

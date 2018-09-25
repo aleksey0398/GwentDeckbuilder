@@ -3,6 +3,7 @@ package com.artyom_panfilenko.gwentdeckbuilder.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.artyom_panfilenko.gwentdeckbuilder.DeckMenu;
 import com.artyom_panfilenko.gwentdeckbuilder.R;
 
 public class NewDeckActivity extends AppCompatActivity {
@@ -40,34 +40,44 @@ public class NewDeckActivity extends AppCompatActivity {
 
                 switch (i) {
                     case 0: {
-                        ArrayAdapter<?> adapter = ArrayAdapter.createFromResource(context, R.array.Monsters_leaders, android.R.layout.simple_spinner_item);
+                        String[] monstersLeaders = {"Arachas Queen","Dagon","Eredin","Unseen Elder"};
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item,monstersLeaders);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spLeader.setAdapter(adapter);
                         Log.d("onItemSelected", String.valueOf(i));
+                        break;
                     }
                     case 1: {
-                        ArrayAdapter<?> adapter = ArrayAdapter.createFromResource(context, R.array.Nilfgaard_leaders, android.R.layout.simple_spinner_item);
+                        String[] nilfgaardLeaders = {"Emhyr","John Calveit","MorvranVoorhis","Usurper"};
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item,nilfgaardLeaders);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spLeader.setAdapter(adapter);
                         Log.d("onItemSelected", String.valueOf(i));
+                        break;
                     }
                     case 2: {
-                        ArrayAdapter<?> adapter = ArrayAdapter.createFromResource(context, R.array.Norhern_Relalms_leaders, android.R.layout.simple_spinner_item);
+                        String[] northernRealmsLeaders = {"King Foltest","King Henselt","King Radovid","Princess Adda"};
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item,northernRealmsLeaders);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spLeader.setAdapter(adapter);
                         Log.d("onItemSelected", String.valueOf(i));
+                        break;
                     }
                     case 3: {
-                        ArrayAdapter<?> adapter = ArrayAdapter.createFromResource(context, R.array.Scoiatael_leaders, android.R.layout.simple_spinner_item);
+                        String[] scoiataelLeaders = {"Brouver Hoog","Eithne","Filavandrel","Francesca Findebair"};
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item,scoiataelLeaders);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spLeader.setAdapter(adapter);
                         Log.d("onItemSelected", String.valueOf(i));
+                        break;
                     }
                     case 4: {
-                        ArrayAdapter<?> adapter = ArrayAdapter.createFromResource(context, R.array.Skellige_leaders, android.R.layout.simple_spinner_item);
+                        String[] skelligeLeaders = {"Bran Tuirseach","Crah an Craite","Eist Tuirseach","Harald the Cripple"};
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item,skelligeLeaders);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spLeader.setAdapter(adapter);
                         Log.d("onItemSelected", String.valueOf(i));
+                        break;
                     }
 
                 }
@@ -82,8 +92,8 @@ public class NewDeckActivity extends AppCompatActivity {
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(NewDeckActivity.this, DeckMenu.class);
-                intent.putExtra("name", txtName.getText());
+                Intent intent = new Intent(NewDeckActivity.this, DeckMenuActivity.class);
+                intent.putExtra("name", txtName.getText().toString());
                 intent.putExtra("faction", (String) spFaction.getSelectedItem());
                 intent.putExtra("leader", (String) spLeader.getSelectedItem());
                 startActivity(intent);

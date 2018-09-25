@@ -2,6 +2,7 @@ package com.artyom_panfilenko.gwentdeckbuilder.adapters;
 
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +12,17 @@ import android.widget.TextView;
 
 import com.artyom_panfilenko.gwentdeckbuilder.Card;
 import com.artyom_panfilenko.gwentdeckbuilder.R;
+import com.artyom_panfilenko.gwentdeckbuilder.activities.DeckMenuActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CardsRVAdapter extends RecyclerView.Adapter<CardsRVAdapter.CardsViewHolder> {
 
-    private List<Card> cards;
+    private ArrayList<Card> cards;
     private Context context;
 
-    public CardsRVAdapter(List<Card> cards, Context context) {
+    public CardsRVAdapter(ArrayList<Card> cards, Context context) {
         this.cards = cards;
         this.context = context;
     }
@@ -36,6 +39,7 @@ public class CardsRVAdapter extends RecyclerView.Adapter<CardsRVAdapter.CardsVie
         holder.txtName.setText(card.getName());
         holder.txtTags.setText(card.getTags());
         holder.txtDescription.setText(card.getDescription());
+        holder.clickListener.setRecord(card);
     }
 
     @Override
@@ -49,6 +53,8 @@ public class CardsRVAdapter extends RecyclerView.Adapter<CardsRVAdapter.CardsVie
         TextView txtTags;
         ImageView image;
         TextView txtDescription;
+        CardView cv;
+        CardViewClickListener clickListener = new CardViewClickListener();
 
         CardsViewHolder(View itemView) {
             super(itemView);
@@ -57,6 +63,21 @@ public class CardsRVAdapter extends RecyclerView.Adapter<CardsRVAdapter.CardsVie
             txtTags = itemView.findViewById(R.id.txt_tags);
             image = itemView.findViewById(R.id.img_card);
             txtDescription = itemView.findViewById(R.id.txt_description);
+            cv = itemView.findViewById(R.id.card_rv_card);
+            cv.setOnClickListener(clickListener);
+        }
+    }
+    public class CardViewClickListener implements View.OnClickListener {
+
+        Card card;
+
+        public void setRecord(Card card) {
+            this.card = card;
+        }
+
+        @Override
+        public void onClick(View view) {
+            DeckMenuActivity.addCard(card);
         }
     }
 

@@ -5,12 +5,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.artyom_panfilenko.gwentdeckbuilder.Deck;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
 
 public class DeckHelper
 
@@ -18,48 +16,52 @@ public class DeckHelper
     SQLiteDatabase db;
 
     public DeckHelper(Context context) {
-        DBHelper dbHelper = new DBHelper(context, "decks");
-        db = dbHelper.getWritableDatabase();
+        DeckDBHelper cardDbHelper = new DeckDBHelper(context);
+        db = cardDbHelper.getWritableDatabase();
     }
 
-    long insert(String name, String faction, String leader, String cards) {
+    public long insert(Deck deck) {
         ContentValues cv = new ContentValues();
-        cv.put(DBHelper.COLUMN_NAME, name);
+        cv.put(DeckDBHelper.COLUMN_NAME, deck.getName());
+        cv.put(DeckDBHelper.COLUMN_LEADER, deck.getLeader());
+        cv.put(DeckDBHelper.COLUMN_FACTION, deck.getFaction());
+        cv.put(DeckDBHelper.COLUMN_CARDS, deck.getCards());
 
-        cv.put(DBHelper.COLUMN_LEADER, leader);
-        cv.put(DBHelper.COLUMN_FACTION, faction);
-        cv.put(DBHelper.COLUMN_CARDS, cards);
-
-        return db.insert(DBHelper.TABLE_DECKS_NAME, null, cv);
+        return db.insert(DeckDBHelper.TABLE_DECKS_NAME, null, cv);
     }
 
-    public ArrayList<Deck> getAll() {
-        Cursor cursor = db.query(DBHelper.TABLE_DECKS_NAME, null, null, null, null, null, null);
-        ArrayList<Deck> arrayList = new ArrayList<>();
+
+    public LinkedList<Deck> getAll() {
+        Cursor cursor = db.query(DeckDBHelper.TABLE_DECKS_NAME, null, null, null, null, null, null);
+        LinkedList<Deck> linkedList = new LinkedList<>();
         cursor.moveToFirst();
         if (!cursor.isAfterLast()) do {
-            int id = cursor.getInt(DBHelper.NUM_COLUMN_ID);
-            Log.d("ID", Integer.toString(id));
-            String name = cursor.getString(DBHelper.NUM_COLUMN_NAME);
-            Log.d("NAME", name);
-            String faction = cursor.getString(DBHelper.NUM_COLUMN_FACTION);
-            Log.d("FACTION", faction);
-            String leader = cursor.getString(DBHelper.NUM_COLUMN_LEADER);
-            Log.d("LEADER", leader);
-            String cards = cursor.getString(DBHelper.NUM_COLUMN_CARDS);
-            Log.d("CARDS", cards);
-            arrayList.add(new Deck(id, name, faction, leader, cards));
+            int id = cursor.getInt(DeckDBHelper.NUM_COLUMN_ID);
+            String name = cursor.getString(DeckDBHelper.NUM_COLUMN_NAME);
+            String faction = cursor.getString(DeckDBHelper.NUM_COLUMN_FACTION);
+            String leader = cursor.getString(DeckDBHelper.NUM_COLUMN_LEADER);
+            String cards = cursor.getString(DeckDBHelper.NUM_COLUMN_CARDS);
+            linkedList.add(new Deck(id, name, faction, leader, cards));
 
         } while (cursor.moveToNext());
         db.close();
-        return arrayList;
+        cursor.close();
+        return linkedList;
     }
 
-    public List<Deck> getAllTest(int count) {
-        List<Deck> decks = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            decks.add(new Deck(i, "Name " + i, "Monsters", "leader " + i, "cards " + i));
-        }
-        return decks;
+
+
+    public void update(Deck deck){
+        ContentValues cv = new ContentValues();
+        cv.put(DeckDBHelper.COLUMN_NAME, deck.getName());
+        cv.put(DeckDBHelper.COLUMN_LEADER, deck.getLeader());
+        cv.put(DeckDBHelper.COLUMN_FACTION, deck.getFaction());
+        cv.put(DeckDBHelper.COLUMN_CARDS, deck.getCards());
+        db.update(DeckDBHelper.TABLE_DECKS_NAME,cv,DeckDBHelper.COLUMN_ID + "=" + String.valueOf(deck.getId()),null);
     }
+
+    public void delete(Deck deck){
+        db.delete(DeckDBHelper.TABLE_DECKS_NAME,DeckDBHelper.COLUMN_ID + "=" + String.valueOf(deck.getId()),null);
+    }
+
 }
